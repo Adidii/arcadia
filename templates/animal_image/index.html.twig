@@ -1,0 +1,8 @@
+
+{% for image in animal_images %}
+    <li>
+<a href="{{ path('app_animal_image_show', { id_image: image.idImage }) }}">{{ image.description }}</a>
+            {{ image.description }} (Animal: {{ image.animal.name }})
+        </a>
+    </li>
+{% endfor %}

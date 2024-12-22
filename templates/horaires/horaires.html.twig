@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Horaires d'ouverture{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/horaires.css') }}">
+{% endblock %}
+
+{% block body %}
+    <!-- Barre de navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="{{ path('home') }}" class="logo">Zoo1</a>
+            <div class="burger-menu" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+             <ul class="nav-links">
+            <li><a href="{{ path('services') }}">Services</a></li>
+            <li><a href="#avis">Avis</a></li>
+            <li><a href="{{ path('horaires') }}">Horaires</a></li>
+            <li><a href="{{ path('contact') }}">Contact</a></li>
+            <li><a href="{{ path('habitat_list') }}">Habitat</a></li>
+            <li><a href="{{ path('app_register') }}">Inscription</a></li>
+             <li><a href="{{ path('app_login') }}">Connexion</a></li>
+        </ul>
+        </div>
+    </nav>
+
+    <div class="horaires-container">
+        <h1>Horaires d'ouverture</h1>
+        <p>Nous sommes ravis de vous accueillir au Zoo1. Voici nos horaires d'ouverture pour que vous puissiez planifier votre visite :</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Jour</th>
+                    <th>Horaires d'ouverture</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for horaire in horaires %}
+                    <tr>
+                        <td>{{ horaire.jour }}</td>
+                        <td>{{ horaire.ouverture|date('H:i') }} - {{ horaire.fermeture|date('H:i') }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p>Nous sommes fermés les jours fériés.</p>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>© 2024 Zoo1. Tous droits réservés.</p>
+            <ul class="footer-links">
+                <li><a href="#">Mentions légales</a></li>
+                <li><a href="#">Politique de confidentialité</a></li>
+                <li><a href="#">Plan du site</a></li>
+            </ul>
+        </div>
+    </footer>
+{% endblock %}

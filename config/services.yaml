@@ -1,0 +1,39 @@
+parameters:
+    images_directory: '%kernel.project_dir%/public/uploads/images'
+
+services:
+    # Default configuration for services in this file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false       # Services are private by default (recommended in Symfony 4+).
+
+    # Google Firestore Client Service Configuration
+    Google\Cloud\Firestore\FirestoreClient:
+        class: Google\Cloud\Firestore\FirestoreClient
+        arguments:
+            - { keyFilePath: '%env(FIREBASE_CREDENTIALS)%' } # Use environment variable for credentials path.
+
+    # Kreait Firebase Factory (used for other Firebase services, such as Realtime Database)
+    Kreait\Firebase\Factory:
+        class: Kreait\Firebase\Factory
+        arguments:
+            - '%kernel.project_dir%/config/config/firebase/zoo1-52a5e-firebase-adminsdk-43lvq-4814f9f99c.json'
+
+    # Autoload all services from src/, including controllers
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    # Ensure controllers are tagged correctly
+    App\Controller\:
+        resource: '../src/Controller/'
+        tags: ['controller.service_arguments']
+
+#services:
+    #App\Entity\:
+        #resource: '../src/Entity'
+       # exclude: '../src/Entity/*'  Assurez-vous que `AnimalImage` n'est pas exclue ici

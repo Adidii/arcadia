@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les services du zoo{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/services.css') }}">
+{% endblock %}
+
+{% block body %}
+    <!-- Barre de navigation -->
+   <nav class="navbar">
+        <div class="navbar-container">
+            <!-- Logo -->
+            <a href="{{ path('home') }}" class="logo">Zoo1</a>
+
+            <!-- Icône du menu burger pour mobile -->
+            <div class="burger-menu" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <!-- Liens de navigation -->
+          <ul class="nav-links">
+            <li><a href="{{ path('services') }}">Services</a></li>
+            <li><a href="#avis">Avis</a></li>
+            <li><a href="{{ path('horaires') }}">Horaires</a></li>
+            <li><a href="{{ path('contact') }}">Contact</a></li>
+            <li><a href="{{ path('habitat_list') }}">Habitat</a></li>
+            <li><a href="{{ path('app_register') }}">Inscription</a></li>
+             <li><a href="{{ path('app_login') }}">Connexion</a></li>
+        </ul>
+        </div>
+    </nav>
+
+    <!-- Titre de la page -->
+    <div class="services-header">
+        <h1>Nos services</h1>
+        <p>Découvrez les services disponibles lors de votre visite au Zoo1.</p>
+    </div>
+
+    <!-- Conteneur des services -->
+    <div class="services-container">
+        {% for service in services %}
+            <div class="service-card" onclick="openModal('{{ loop.index }}')">
+                <img src="{{ asset('images/' ~ service.nom | lower ~ '.jpeg') }}" alt="{{ service.nom }}" class="service-image">
+                <h2>{{ service.nom }}</h2>
+            </div>
+
+            <!-- Modal pour la description -->
+            <div id="serviceModal{{ loop.index }}" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('{{ loop.index }}')">&times;</span>
+                    <h2>{{ service.nom }}</h2>
+                    <p>{{ service.description }}</p>
+                    <p>Ouverture : {{ service.horaireOuverture|date('H:i') }}</p>
+                    <p>Fermeture : {{ service.horaireFermeture|date('H:i') }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>© 2024 Zoo1. Tous droits réservés.</p>
+            <ul class="footer-links">
+                <li><a href="#">Mentions légales</a></li>
+                <li><a href="#">Politique de confidentialité</a></li>
+                <li><a href="#">Plan du site</a></li>
+            </ul>
+        </div>
+    </footer>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/services.js') }}"></script>
+{% endblock %}

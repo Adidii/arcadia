@@ -1,0 +1,113 @@
+/* Style global */
+body {
+    font-family: 'Verdana', sans-serif;
+    background-color: #e8f5e9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+/* Conteneur des horaires */
+.horaires-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+/* Titre */
+h1 {
+    font-size: 2.5em;
+    color: #4CAF50;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Texte d'introduction */
+.intro-text {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Tableau */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table thead {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1.1em;
+    text-transform: uppercase;
+}
+
+table th, table td {
+    padding: 15px;
+    text-align: center;
+}
+
+table th {
+    background-color: #66bb6a;
+    color: white;
+}
+
+table td {
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 1.1em;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Effet de survol sur les lignes */
+table tr:hover td {
+    background-color: #e0f2f1;
+    transition: background-color 0.3s;
+}
+
+/* Style pour les lignes impaires */
+table tr:nth-child(even) td {
+    background-color: #f3f3f3;
+}
+
+/* Texte d'information */
+.info {
+    font-size: 1em;
+    color: #777;
+    margin-top: 20px;
+}
+
+/* Footer */
+.footer {
+    background-color: #2e7d32;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.footer-links li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+.footer-links li a:hover {
+    text-decoration: underline;
+}

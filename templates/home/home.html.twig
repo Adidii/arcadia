@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoo1 - Bienvenue au Zoo</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar transparent">
+            <div class="container">
+                <a href="/" class="logo">Zoo1</a>
+                <ul class="nav-links">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#avis">Avis</a></li>
+                    <li><a href="#horaires">Horaires</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#contact">Habitat</a></li>
+                    <li><a href="#contact">Inscription</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+  <!-- Slider -->
+<section class="slider">
+    <div class="slide">
+        <img src="{{ asset('images/image1.jpeg') }}" alt="Image 1">
+    </div>
+    <div class="slide">
+        <img src="{{ asset('images/image2.jpeg') }}" alt="Image 2">
+    </div>
+    <div class="slide">
+        <img src="{{ asset('images/image3.jpeg') }}" alt="Image 3">
+    </div>
+
+    <!-- Navigation Buttons -->
+    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="next" onclick="moveSlide(1)">&#10095;</button>
+</section>
+
+
+
+    <!-- Services -->
+    <section id="services">
+        <h2>Nos Services</h2>
+        <div class="services-container">
+            <div class="service">
+                <h3>Visites guidées</h3>
+                <p>Découvrez les animaux avec un guide expert.</p>
+            </div>
+            <div class="service">
+                <h3>Restauration</h3>
+                <p>Restaurants et snacks dans le zoo.</p>
+            </div>
+            <div class="service">
+                <h3>Ateliers enfants</h3>
+                <p>Des activités éducatives pour les plus jeunes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Avis -->
+    <section id="avis">
+        <h2>Ce que disent nos visiteurs</h2>
+        <div class="avis-container">
+            <div class="avis-slide">
+                <p>"Incroyable expérience, nous avons adoré les animaux !"</p>
+                <span>- Marc</span>
+            </div>
+            <div class="avis-slide">
+                <p>"Un excellent moment passé en famille. Je recommande !"</p>
+                <span>- Sarah</span>
+            </div>
+            <div class="avis-slide">
+                <p>"Les enfants étaient ravis, beaucoup à apprendre."</p>
+                <span>- Lucas</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Horaires et Localisation -->
+    <section id="horaires">
+        <h2>Horaires & Localisation</h2>
+        <div class="horaires">
+            <p>Lundi - Vendredi : 9h - 18h</p>
+            <p>Samedi - Dimanche : 10h - 20h</p>
+        </div>
+        <div class="localisation">
+            <p>Adresse : 123 Rue du Zoo, Paris, France</p>
+            <div id="map"></div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <h2>Contactez-nous</h2>
+        <form action="" method="POST">
+            <input type="text" name="name" placeholder="Votre nom">
+            <input type="email" name="email" placeholder="Votre email">
+            <textarea name="message" placeholder="Votre message"></textarea>
+            <button type="submit">Envoyer</button>
+        </form>
+    </section>
+
+    <!-- Newsletter -->
+    <section id="newsletter">
+        <h2>Abonnez-vous à notre Newsletter</h2>
+        <form action="" method="POST">
+            <input type="email" name="email" placeholder="Votre email">
+            <button type="submit">S'abonner</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Zoo1. Tous droits réservés.</p>
+    </footer>
+
+    <script src="{{ asset('js/app.js') }}"></script>
+</body>
+</html>

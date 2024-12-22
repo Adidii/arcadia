@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Employee{% endblock %}
+
+{% block body %}
+    <h1>Employee</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id_employe</th>
+                <td>{{ employee.idEmploye }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ employee.nom }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ employee.email }}</td>
+            </tr>
+            <tr>
+                <th>Mot_de_passe</th>
+                <td>{{ employee.motDePasse }}</td>
+            </tr>
+            <tr>
+                <th>Role</th>
+                <td>{{ employee.role }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_employee_crud_index') }}">back to list</a>
+
+    <a href="{{ path('app_employee_crud_edit', {'id_employe': employee.id_employe}) }}">edit</a>
+
+    {{ include('employee_crud/_delete_form.html.twig') }}
+{% endblock %}

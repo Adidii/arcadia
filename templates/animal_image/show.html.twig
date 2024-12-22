@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Animal Image Details</h1>
+<p>ID: {{ animal_image.getIdImage() }}</p>
+<p>URL: <a href="{{ animal_image.getUrl() }}" target="_blank">{{ animal_image.getUrl() }}</a></p>
+<p>Description: {{ animal_image.getDescription() }}</p>
+<p>Animal: {{ animal_image.getAnimal().getName() }}</p>
+
+{% endblock %}

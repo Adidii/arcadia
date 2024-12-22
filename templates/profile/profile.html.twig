@@ -1,0 +1,33 @@
+{# templates/profile/profile.html.twig #}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Profil</title>
+    <link rel="stylesheet" href="{{ asset('css/profile.css') }}">  {# Charger le fichier CSS #}
+</head>
+<body>
+    <!-- Barre de navigation -->
+    <header>
+        <nav>
+            <a href="/" style="color: white;">Accueil</a> |
+            <a href="/profile" style="color: white;">Mon Profil</a>
+        </nav>
+    </header>
+
+    <!-- Contenu principal -->
+    <div class="container">
+        <h1>Mon Profil</h1>
+        <p>Bienvenue, {{ user.nom }} !</p>
+        <p>Email : {{ user.email }}</p>
+        <p>Rôles : {{ user.roles|json_encode }}</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; {{ "now"|date("Y") }} Zoo1. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

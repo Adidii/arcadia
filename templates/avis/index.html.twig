@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/avis.css') }}">
+{% endblock %}
+
+{% block title %}Avis{% endblock %}
+
+{% block body %}
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="logo">MONZOO</a>
+           <ul class="nav-links">
+            <li><a href="{{ path('services') }}">Services</a></li>
+            <li><a href="#avis">Avis</a></li>
+            <li><a href="{{ path('horaires') }}">Horaires</a></li>
+            <li><a href="{{ path('contact') }}">Contact</a></li>
+            <li><a href="{{ path('habitat_list') }}">Habitat</a></li>
+            <li><a href="{{ path('app_register') }}">Inscription</a></li>
+             <li><a href="{{ path('app_login') }}">Connexion</a></li>
+        </ul>
+            <div class="burger-menu">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </nav>
+
+    <h1>Donnez votre avis</h1>
+
+    <!-- Formulaire d'avis -->
+    <form action="{{ path('submit_avis') }}" method="post">
+        <label for="name">Nom :</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="review">Votre avis :</label>
+        <textarea id="review" name="review" required></textarea>
+
+        <button type="submit">Envoyer</button>
+    </form>
+
+    <h2>Avis des utilisateurs</h2>
+    <div id="reviewsContainer">
+        {% if reviews is not empty %}
+            {% for review in reviews %}
+                <div class="review">
+                    <strong>{{ review.name }}</strong>
+                    <p>{{ review.review }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Aucun avis pour le moment.</p>
+        {% endif %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <ul class="footer-links">
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/terms">Conditions d'utilisation</a></li>
+            <li><a href="/privacy">Politique de confidentialité</a></li>
+        </ul>
+        <p>&copy; 2024 MONZOO - Tous droits réservés</p>
+    </footer>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/avis.js') }}"></script>
+{% endblock %}

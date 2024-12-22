@@ -1,0 +1,20 @@
+easy_admin:
+    site_name: 'Admin Dashboard'
+    entities:
+        Users:
+            class: App\Entity\Users
+            label: 'Users'
+            list:
+                title: 'Liste des utilisateurs'
+                fields:
+                    - { property: 'id', label: 'ID' }
+                    - { property: 'nom', label: 'Nom' }
+                    - { property: 'email', label: 'Email' }
+                    - { property: 'isVerified', label: 'Vérifié' }
+                    - { property: 'roles', label: 'Rôles' }
+            form:
+                fields:
+                    - 'nom'
+                    - 'email'
+                    - 'isVerified'
+                    - 'roles'

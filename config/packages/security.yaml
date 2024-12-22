@@ -1,0 +1,38 @@
+security:
+    # Déclaration des fournisseurs d'utilisateurs
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\Users  # Utilisation de Users comme classe de l'entité
+                property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            lazy: true
+            provider: app_user_provider
+
+            # Gestion du login via un formulaire
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                default_target_path: app_profile  # Redirige vers la page de profil après connexion
+
+            # Gestion de la déconnexion
+            logout:
+                path: app_logout
+                target: /
+
+    # Règles de contrôle d'accès
+    access_control:
+        # Restreint l'accès à la page profile aux utilisateurs connectés
+        - { path: ^/profile, roles: ROLE_USER }
+        # Restreint l'accès à l'administration aux utilisateurs avec le rôle ROLE_ADMIN
+
+    # Configuration des password hashers
+    password_hashers:
+        App\Entity\Users:  # Utilisation de Users comme entité
+            algorithm: auto

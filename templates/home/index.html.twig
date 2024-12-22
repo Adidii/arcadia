@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+{% endblock %}
+
+{% block body %}
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar">
+            <div class="navbar-container">
+                <a href="{{ path('home') }}" class="logo">Zoo1</a>
+                <ul class="nav-links">
+            <li><a href="{{ path('services') }}">Services</a></li>
+            <li><a href="#avis">Avis</a></li>
+            <li><a href="{{ path('horaires') }}">Horaires</a></li>
+            <li><a href="{{ path('contact') }}">Contact</a></li>
+            <li><a href="{{ path('habitat_list') }}">Habitat</a></li>
+            <li><a href="{{ path('app_register') }}">Inscription</a></li>
+             <li><a href="{{ path('app_login') }}">Connexion</a></li>
+        </ul>
+            </div>
+        </nav>
+    </header>
+<section class="slider">
+    <div class="slide">
+        <img src="{{ asset('images/image1.jpeg') }}" alt="Image 1">
+    </div>
+    <div class="slide">
+        <img src="{{ asset('images/image2.jpeg') }}" alt="Image 2">
+    </div>
+    <div class="slide">
+        <img src="{{ asset('images/image3.jpeg') }}" alt="Image 3">
+    </div>
+
+    <!-- Navigation Buttons -->
+    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="next" onclick="moveSlide(1)">&#10095;</button>
+</section>
+
+
+    <!-- Services -->
+    <section id="services">
+        <h2>Nos Services</h2>
+        <div class="services-container">
+            {% for service in services %}
+                <div class="service">
+                    <h3>{{ service.nom }}</h3>
+                    <p>{{ service.description }}</p>
+                    <p>Ouverture : {{ service.horaireOuverture|date('H:i') }}</p>
+                    <p>Fermeture : {{ service.horaireFermeture|date('H:i') }}</p>
+                </div>
+            {% else %}
+                <p>Aucun service disponible pour le moment.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Horaires -->
+    <section id="horaires">
+        <h2>Horaires & Localisation</h2>
+        <div class="horaires-container">
+            {% for horaire in horaires %}
+                <p>{{ horaire.jour }} : {{ horaire.ouverture|date('H:i') }} - {{ horaire.fermeture|date('H:i') }}</p>
+            {% else %}
+                <p>Horaires non disponibles.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Habitats -->
+    <section id="habitats">
+        <h2>Nos Habitats</h2>
+        <div class="habitats-container">
+            {% for habitat in habitats %}
+                <div class="habitat">
+                    <h3>{{ habitat.nom }}</h3>
+                    <img src="{{ asset(habitat.imageUrl) }}" alt="Image de {{ habitat.nom }}">
+                    <p>{{ habitat.description }}</p>
+                </div>
+            {% else %}
+                <p>Aucun habitat disponible pour le moment.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <h2>Contactez-nous</h2>
+        <form action="{{ path('contact') }}" method="POST">
+            <div>
+                <label for="name">Nom complet</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="subject">Sujet</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            <div>
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit">Envoyer</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 Zoo1. Tous droits réservés.</p>
+            <ul class="footer-links">
+                <li><a href="#">Mentions légales</a></li>
+                <li><a href="#">Politique de confidentialité</a></li>
+                <li><a href="#">Plan du site</a></li>
+            </ul>
+        </div>
+    </footer>
+{% endblock %}

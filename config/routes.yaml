@@ -1,0 +1,94 @@
+# config/routes.yaml
+home:
+    path: /
+    controller: App\Controller\HomeController::index
+
+app_login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+
+app_logout:
+    path: /logout
+    controller: App\Controller\SecurityController::logout
+
+# config/routes.yaml
+register:
+    path: /register
+    controller: App\Controller\RegistrationController::register
+
+# config/routes.yaml
+controllers:
+    resource: '../src/Controller/'
+    type: attribute
+
+# config/routes.yaml
+
+# config/routes.yaml
+
+terms:
+    path: /terms
+    controller: App\Controller\PolicyController::showTerms
+
+privacy:
+    path: /privacy
+    controller: App\Controller\PolicyController::showPrivacy
+
+habitat_list:
+    path: /habitats
+    controller: App\Controller\HabitatController::index
+
+contact:
+    path: /contact
+    controller: App\Controller\ContactController::index
+
+contact_submit:
+    path: /contact/submit
+    controller: App\Controller\ContactController::submit
+
+horaires:
+    path: /horaires
+    controller: App\Controller\HorairesController::index
+
+services:
+    path: /services
+    controller: App\Controller\ServicesController::index
+
+avis:
+    path: /avis
+    controller: App\Controller\AvisController::index
+
+admin:
+    path: /admin
+    controller: App\Controller\Admin\AdminDashboardController::index
+
+avis_test_firestore:
+    path: /test-firestore
+    controller: App\Controller\AvisController::testFirestore
+
+submit_avis:
+    path: /avis/submit
+    controller: App\Controller\AvisController::submit
+    methods: [POST]
+
+animal:
+    path: /animal
+    controller: App\Controller\AnimalController::index
+
+animal_image:
+    path: /animalimage
+    controller: App\Controller\AnimalImageController::index
+
+
+animal_image_show:
+    path: /animal-image/{id}
+    controller: App\Controller\AnimalImageController::show
+    methods: [GET]
+
+api_animals:
+    path: /api/animals
+    controller: App\Controller\ApiController::getAnimals
+    methods: [GET]
+
+app_verify_email:
+    path: /verify-email
+    controller: App\Controller\SecurityController::verifyEmail

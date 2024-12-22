@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Employee index{% endblock %}
+
+{% block body %}
+    <h1>Employee index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id_employe</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Mot_de_passe</th>
+                <th>Role</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for employee in employees %}
+            <tr>
+                <td>{{ employee.idEmploye }}</td>
+                <td>{{ employee.nom }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.motDePasse }}</td>
+                <td>{{ employee.role }}</td>
+                <td>
+                    <a href="{{ path('app_employee_crud_show', {'id_employe': employee.id_employe}) }}">show</a>
+                    <a href="{{ path('app_employee_crud_edit', {'id_employe': employee.id_employe}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_employee_crud_new') }}">Create new</a>
+{% endblock %}

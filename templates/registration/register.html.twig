@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+{% endblock %}
+
+{% block body %}
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="{{ path('home') }}" class="logo">Zoo1</a>
+           <ul class="nav-links">
+            <li><a href="{{ path('services') }}">Services</a></li>
+            <li><a href="#avis">Avis</a></li>
+            <li><a href="{{ path('horaires') }}">Horaires</a></li>
+            <li><a href="{{ path('contact') }}">Contact</a></li>
+            <li><a href="{{ path('habitat_list') }}">Habitat</a></li>
+            <li><a href="{{ path('app_register') }}">Inscription</a></li>
+             <li><a href="{{ path('app_login') }}">Connexion</a></li>
+        </ul>
+        </div>
+    </nav>
+
+    <div class="register-container">
+        <h1>Inscription</h1>
+
+        <!-- Affichage des erreurs de validation -->
+        {% for flash_error in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger">{{ flash_error }}</div>
+        {% endfor %}
+
+        <!-- Formulaire d'inscription -->
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.nom) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword) }}
+            {{ form_row(registrationForm.agreeTerms) }}
+
+            <button type="submit" class="btn">S'inscrire</button>
+        {{ form_end(registrationForm) }}
+
+        <p>En vous inscrivant, vous acceptez nos <a href="{{ path('terms') }}">termes et conditions</a>.</p>
+    </div>
+{% endblock %}

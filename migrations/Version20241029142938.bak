@@ -1,0 +1,117 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DoctrineMigrations;
+
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
+
+/**
+ * Auto-generated Migration: Please modify to your needs!
+ */
+final class Version20241029142938 extends AbstractMigration
+{
+    public function getDescription(): string
+    {
+        return 'Migration pour renommer la table user en users et ajouter la colonne jour à la table opening_and_closing_hours';
+    }
+
+    public function up(Schema $schema): void
+    {
+        // Remplacez "user" par "users" si la table a été renommée
+        $this->addSql('ALTER TABLE "user" RENAME TO "users"');
+        
+        // Autres commandes SQL de la migration...
+    
+    
+        // Création des séquences et autres tables (si elles ne sont pas déjà présentes)
+        $this->addSql('CREATE SEQUENCE administrator_id_admin_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE animal_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE animal_image_id_image_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE consultation_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE consumption_id_consommation_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE contact_id_contact_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE employee_id_employe_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE habitat_id_habitat_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE opening_and_closing_hours_id_horaire_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE review_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE service_id_service_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE test_entity_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE user_id_utilisateur_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE veterinarian_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE visitor_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        
+        // Création des tables
+        $this->addSql('CREATE TABLE administrator (id_admin INT NOT NULL, nom VARCHAR(100) NOT NULL, email VARCHAR(100) NOT NULL, mot_de_passe VARCHAR(255) NOT NULL, PRIMARY KEY(id_admin))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_58DF0651E7927C74 ON administrator (email)');
+        $this->addSql('CREATE TABLE animal (id INT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE animal_image (id_image INT NOT NULL, id_animal_id INT NOT NULL, url VARCHAR(255) NOT NULL, description TEXT NOT NULL, PRIMARY KEY(id_image))');
+        $this->addSql('CREATE INDEX IDX_E4CEDDABEA39031 ON animal_image (id_animal_id)');
+        $this->addSql('CREATE TABLE consultation (id INT NOT NULL, veterinarian_id INT NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE INDEX IDX_964685A6804C8213 ON consultation (veterinarian_id)');
+        $this->addSql('CREATE TABLE consumption (id_consommation INT NOT NULL, id_animal_id INT NOT NULL, nourriture VARCHAR(50) NOT NULL, grammage NUMERIC(10, 2) NOT NULL, date DATE NOT NULL, PRIMARY KEY(id_consommation))');
+        $this->addSql('CREATE INDEX IDX_2CFF2DF9EA39031 ON consumption (id_animal_id)');
+        $this->addSql('CREATE TABLE contact (id_contact INT NOT NULL, nom VARCHAR(100) NOT NULL, email VARCHAR(100) NOT NULL, message TEXT NOT NULL, date DATE NOT NULL, PRIMARY KEY(id_contact))');
+        
+        // Modification: Utilisation de VARCHAR avec une contrainte CHECK au lieu de ENUM
+        $this->addSql('CREATE TABLE employee (id_employe INT NOT NULL, nom VARCHAR(100) NOT NULL, email VARCHAR(100) NOT NULL, mot_de_passe VARCHAR(255) NOT NULL, role VARCHAR(50) NOT NULL, CHECK (role IN (\'employe\', \'veterinaire\')), PRIMARY KEY(id_employe))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_5D9F75A1E7927C74 ON employee (email)');
+
+        $this->addSql('CREATE TABLE habitat (id_habitat INT NOT NULL, nom VARCHAR(100) NOT NULL, description TEXT NOT NULL, image_url VARCHAR(255) NOT NULL, PRIMARY KEY(id_habitat))');
+        
+        // Ajout de la colonne "jour" dans opening_and_closing_hours
+        $this->addSql('CREATE TABLE opening_and_closing_hours (id_horaire INT NOT NULL, ouverture TIME(0) WITHOUT TIME ZONE NOT NULL, fermeture TIME(0) WITHOUT TIME ZONE NOT NULL, jour VARCHAR(10) DEFAULT NULL, PRIMARY KEY(id_horaire))');
+
+        $this->addSql('CREATE TABLE review (id INT NOT NULL, visitor_id INT NOT NULL, content TEXT NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE INDEX IDX_794381C670BEE6D ON review (visitor_id)');
+        $this->addSql('CREATE TABLE service (id_service INT NOT NULL, nom VARCHAR(100) NOT NULL, description TEXT NOT NULL, horaire_ouverture TIME(0) WITHOUT TIME ZONE NOT NULL, horaire_fermeture TIME(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id_service))');
+        $this->addSql('CREATE TABLE test_entity (id INT NOT NULL, name VARCHAR(100) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE users (id_utilisateur INT NOT NULL, nom VARCHAR(100) NOT NULL, email VARCHAR(100) NOT NULL, mot_de_passe VARCHAR(255) NOT NULL, role JSON NOT NULL, is_verified BOOLEAN NOT NULL, PRIMARY KEY(id_utilisateur))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649E7927C74 ON users (email)');
+        $this->addSql('CREATE TABLE veterinarian (id INT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE visitor (id INT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        
+        // Ajout des contraintes de clé étrangère
+        $this->addSql('ALTER TABLE animal_image ADD CONSTRAINT FK_E4CEDDABEA39031 FOREIGN KEY (id_animal_id) REFERENCES animal (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE consultation ADD CONSTRAINT FK_964685A6804C8213 FOREIGN KEY (veterinarian_id) REFERENCES veterinarian (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE consumption ADD CONSTRAINT FK_2CFF2DF9EA39031 FOREIGN KEY (id_animal_id) REFERENCES animal (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE review ADD CONSTRAINT FK_794381C670BEE6D FOREIGN KEY (visitor_id) REFERENCES visitor (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+    }
+
+    public function down(Schema $schema): void
+    {
+        // Revert all changes
+        $this->addSql('DROP SEQUENCE administrator_id_admin_seq CASCADE');
+        $this->addSql('DROP SEQUENCE animal_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE animal_image_id_image_seq CASCADE');
+        $this->addSql('DROP SEQUENCE consultation_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE consumption_id_consommation_seq CASCADE');
+        $this->addSql('DROP SEQUENCE contact_id_contact_seq CASCADE');
+        $this->addSql('DROP SEQUENCE employee_id_employe_seq CASCADE');
+        $this->addSql('DROP SEQUENCE habitat_id_habitat_seq CASCADE');
+        $this->addSql('DROP SEQUENCE opening_and_closing_hours_id_horaire_seq CASCADE');
+        $this->addSql('DROP SEQUENCE review_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE service_id_service_seq CASCADE');
+        $this->addSql('DROP SEQUENCE test_entity_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE user_id_utilisateur_seq CASCADE');
+        $this->addSql('DROP SEQUENCE veterinarian_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE visitor_id_seq CASCADE');
+        
+        $this->addSql('DROP TABLE administrator');
+        $this->addSql('DROP TABLE animal');
+        $this->addSql('DROP TABLE animal_image');
+        $this->addSql('DROP TABLE consultation');
+        $this->addSql('DROP TABLE consumption');
+        $this->addSql('DROP TABLE contact');
+        $this->addSql('DROP TABLE employee');
+        $this->addSql('DROP TABLE habitat');
+        $this->addSql('DROP TABLE opening_and_closing_hours');
+        $this->addSql('DROP TABLE review');
+        $this->addSql('DROP TABLE service');
+        $this->addSql('DROP TABLE test_entity');
+        $this->addSql('DROP TABLE users');
+        $this->addSql('DROP TABLE veterinarian');
+        $this->addSql('DROP TABLE visitor');
+    }
+}

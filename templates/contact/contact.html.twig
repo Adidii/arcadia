@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contactez-nous{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
+{% endblock %}
+
+{% block body %}
+   <nav class="navbar">
+    <div class="navbar-container">
+        <!-- Logo -->
+        <a href="{{ path('home') }}" class="logo">Zoo1</a>
+
+        <!-- Icône du menu burger pour mobile -->
+        <div class="burger-menu" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <!-- Liens de navigation -->
+       <ul class="nav-links">
+            <li><a href="{{ path('services') }}">Services</a></li>
+            <li><a href="#avis">Avis</a></li>
+            <li><a href="{{ path('horaires') }}">Horaires</a></li>
+            <li><a href="{{ path('contact') }}">Contact</a></li>
+            <li><a href="{{ path('habitat_list') }}">Habitat</a></li>
+            <li><a href="{{ path('app_register') }}">Inscription</a></li>
+             <li><a href="{{ path('app_login') }}">Connexion</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+    <!-- Section de la page de contact -->
+    <div class="contact-container">
+        <h1>Contactez-nous</h1>
+        <p class="intro-text">Pour toute question ou demande, n'hésitez pas à nous contacter via le formulaire ci-dessous ou à nous appeler. Nous serions ravis de vous aider.</p>
+
+        <div class="contact-form">
+            <form action="{{ path('contact_submit') }}" method="POST">
+                <div class="form-group">
+                    <label for="name">Nom complet</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Sujet</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="6" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Envoyer</button>
+            </form>
+        </div>
+
+        <div class="contact-details">
+            <h2>Informations de contact</h2>
+            <p><strong>Adresse :</strong> 123 Rue des Animaux, Parc National, 75000, Paris</p>
+            <p><strong>Téléphone :</strong> +33 1 23 45 67 89</p>
+            <p><strong>Email :</strong> contact@zoo1.com</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>© 2024 Zoo1. Tous droits réservés.</p>
+            <ul class="footer-links">
+                <li><a href="#">Mentions légales</a></li>
+                <li><a href="#">Politique de confidentialité</a></li>
+                <li><a href="#">Plan du site</a></li>
+            </ul>
+        </div>
+    </footer>
+{% endblock %}

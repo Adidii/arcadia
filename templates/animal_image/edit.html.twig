@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ form.vars.value.id_image ? 'Edit' : 'New' }} Animal Image</h1>
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button>{{ form.vars.value.id_image ? 'Update' : 'Create' }}</button>
+    {{ form_end(form) }}
+{% endblock %}

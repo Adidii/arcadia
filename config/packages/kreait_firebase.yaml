@@ -1,0 +1,4 @@
+kreait_firebase:
+    projects:
+        default:
+            credentials: '%kernel.project_dir%/config/firebase/zoo1-52a5e-firebase-adminsdk-43lvq-4814f9f99c.json'

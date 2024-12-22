@@ -1,0 +1,12 @@
+{# templates/registration/verify_email_success.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Vérification réussie{% endblock %}
+
+{% block body %}
+    <h1>Votre email a été vérifié avec succès !</h1>
+    <p>Vous pouvez maintenant vous connecter.</p>
+
+    <a href="{{ path('app_login') }}">Se connecter</a>
+{% endblock %}

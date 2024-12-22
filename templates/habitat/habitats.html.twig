@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les Habitats du Zoo{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/habitats.css') }}">
+{% endblock %}
+
+{% block body %}
+    <!-- Barre de navigation -->
+   <nav class="navbar">
+    <div class="navbar-container">
+        <!-- Logo -->
+        <a href="{{ path('home') }}" class="logo">Zoo1</a>
+
+        <!-- Icône du menu burger pour mobile -->
+        <div class="burger-menu" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <!-- Liens de navigation -->
+        <ul class="nav-links">
+            <li><a href="{{ path('services') }}">Services</a></li>
+            <li><a href="#avis">Avis</a></li>
+            <li><a href="{{ path('horaires') }}">Horaires</a></li>
+            <li><a href="{{ path('contact') }}">Contact</a></li>
+            <li><a href="{{ path('habitat_list') }}">Habitat</a></li>
+            <li><a href="{{ path('app_register') }}">Inscription</a></li>
+        </ul>
+    </div>
+</nav>
+
+    <h1 class="page-title">Les Habitats du Zoo</h1>
+
+    <div class="habitats-container">
+        {% for habitat in habitats %}
+            <div class="habitat-card" onclick="openModal('{{ loop.index }}')">
+                <img src="{{ asset('uploads/images/' ~ habitat.imageUrl) }}" alt="{{ habitat.nom }}" class="habitat-image">
+                <h2>{{ habitat.nom }}</h2>
+                <p>{{ habitat.description }}</p>
+            </div>
+
+            <!-- Modal personnalisé -->
+            <div id="habitatModal{{ loop.index }}" class="modal">
+                <span class="close" onclick="closeModal('{{ loop.index }}')">&times;</span>
+                <div class="modal-content">
+                    <div class="modal-carousel">
+                        <img src="{{ asset('uploads/images/' ~ habitat.imageUrl) }}" class="carousel-image active" alt="{{ habitat.nom }}">
+                        <!-- Ajout d'autres images si nécessaire -->
+                        <img src="{{ asset('uploads/images/placeholder.jpg') }}" class="carousel-image" alt="Image supplémentaire">
+                    </div>
+                    <p>{{ habitat.description }}</p>
+                </div>
+                <div class="carousel-controls">
+                    <span class="prev" onclick="prevSlide('{{ loop.index }}')">&#10094;</span>
+                    <span class="next" onclick="nextSlide('{{ loop.index }}')">&#10095;</span>
+                </div>
+            </div>
+        {% else %}
+            <p>Aucun habitat n'est disponible pour le moment.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/habitats.js') }}"></script>
+{% endblock %}

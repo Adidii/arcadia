@@ -23,13 +23,13 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 100, unique: true)]
     private ?string $email = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private ?string $mot_de_passe = null;
+    #[ORM\Column(name: 'password', type: 'string', length: 255)]
+    private ?string $password = null;
 
-    #[ORM\Column(name: 'role', type: 'json')]
+    #[ORM\Column(name: 'roles', type: 'json')]
     private array $roles = [];
 
-    #[ORM\Column]
+    #[ORM\Column(name: 'is_verified', type: 'boolean')]
     private bool $isVerified = false;
 
     // Getters et Setters
@@ -75,12 +75,12 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getPassword(): ?string
     {
-        return $this->mot_de_passe;
+        return $this->password;
     }
 
-    public function setPassword(string $mot_de_passe): self
+    public function setPassword(string $password): self
     {
-        $this->mot_de_passe = $mot_de_passe;
+        $this->password = $password;
         return $this;
     }
 
@@ -91,7 +91,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function eraseCredentials(): void
     {
-        // Si tu stockes des données sensibles, efface-les ici
+        // Efface les données sensibles ici si nécessaire
     }
 
     public function isVerified(): bool
